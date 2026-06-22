@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Trellis — grow an Obsidian knowledge graph from YouTube</title>
-<link rel="icon" type="image/png" href="assets/logo.png" />
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
 <meta name="description" content="Trellis turns a YouTube channel's transcripts into an Obsidian vault whose graph view clusters videos by topic. Linked Markdown notes with tags and wikilinks." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,15 +38,20 @@
 
   header.hero{ text-align:center; padding:84px 0 24px; }
 
-  /* logo: the vine climbs the trellis on load, then sways like a living plant */
-  .logo-stage{ display:inline-block; transform-origin:50% 100%;
-    animation: sway 6.5s ease-in-out 1.5s infinite; }
-  .logo{ display:block; height:128px; width:128px; border-radius:26px;
-    border:1px solid rgba(255,255,255,0.14); box-shadow:0 14px 36px rgba(0,0,0,0.45);
-    animation: grow 1.6s cubic-bezier(.16,.7,.2,1) both, glow 4.5s ease-in-out 1.7s infinite; }
-  @keyframes grow{ from{ clip-path:inset(100% 0 0 0); opacity:0; } 45%{ opacity:1; } to{ clip-path:inset(0 0 0 0); opacity:1; } }
-  @keyframes sway{ 0%,100%{ transform:rotate(-1.4deg); } 50%{ transform:rotate(1.4deg); } }
-  @keyframes glow{ 0%,100%{ filter:drop-shadow(0 4px 14px rgba(67,209,127,.20)); } 50%{ filter:drop-shadow(0 6px 26px rgba(67,209,127,.42)); } }
+  /* logo: the vine draws itself up the trellis, then sways like a living plant */
+  .logo-stage{ display:inline-block; }
+  .tlogo{ display:block; width:134px; height:134px;
+    animation: glow 4.5s ease-in-out 2.1s infinite; }
+  .tlogo .vine{ stroke-dasharray:1; stroke-dashoffset:1; animation: draw 1.9s ease-out .3s forwards; }
+  .tlogo .leaf{ opacity:0; transform-box:fill-box; transform-origin:60% 80%;
+    animation: pop .55s cubic-bezier(.34,1.5,.6,1) 1.75s forwards; }
+  .tlogo .swayg{ transform-box:fill-box; transform-origin:50% 100%;
+    animation: sway 6.5s ease-in-out 2.1s infinite; }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes pop{ from{ opacity:0; transform:scale(.3) rotate(-14deg); } to{ opacity:1; transform:scale(1) rotate(0); } }
+  @keyframes sway{ 0%,100%{ transform:rotate(-1.5deg); } 50%{ transform:rotate(1.5deg); } }
+  @keyframes glow{ 0%,100%{ filter:drop-shadow(0 0 7px rgba(67,209,127,.22)); } 50%{ filter:drop-shadow(0 0 20px rgba(67,209,127,.5)); } }
+  @media (prefers-reduced-motion:reduce){ .tlogo,.tlogo *{ animation:none !important; } .tlogo .vine{ stroke-dashoffset:0; } .tlogo .leaf{ opacity:1; } }
   @media (prefers-reduced-motion:reduce){ .logo-stage{ animation:none; } .logo{ animation:none; } }
 
   .mark{ display:inline-flex; align-items:center; gap:10px; margin-top:14px; font:600 13px/1 "JetBrains Mono",monospace;
@@ -99,7 +104,30 @@
 <div class="wrap">
   <header class="hero">
     <div class="logo-stage">
-      <img class="logo" src="assets/logo.png" alt="Trellis logo" width="150" height="150" />
+      <svg class="tlogo" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trellis logo">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#f6cf57"/><stop offset="1" stop-color="#cf9a22"/>
+          </linearGradient>
+          <linearGradient id="vine" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#2f9b4e"/><stop offset="0.55" stop-color="#5ec45f"/><stop offset="1" stop-color="#8fe07a"/>
+          </linearGradient>
+          <clipPath id="frame"><rect x="24" y="24" width="80" height="80" rx="16"/></clipPath>
+        </defs>
+        <g class="swayg">
+          <g clip-path="url(#frame)" stroke="url(#gold)" stroke-width="5" stroke-linecap="round">
+            <path d="M24 56 L56 24 M24 80 L80 24 M24 104 L104 24 M40 104 L104 40 M64 104 L104 64 M88 104 L104 88"/>
+            <path d="M24 72 L72 104 M24 48 L80 104 M24 24 L104 104 M40 24 L104 88 M64 24 L104 64 M88 24 L104 40"/>
+          </g>
+          <rect x="24" y="24" width="80" height="80" rx="16" fill="none" stroke="url(#gold)" stroke-width="6"/>
+          <path class="vine" pathLength="1" fill="none" stroke="url(#vine)" stroke-width="6.5" stroke-linecap="round"
+            d="M52 110 C 40 92 72 86 58 70 C 47 57 82 52 70 36 C 63 27 70 24 76 16"/>
+          <g class="leaf">
+            <path d="M76 16 C 86 4 102 6 102 6 C 101 19 90 26 76 18 Z" fill="url(#vine)"/>
+            <path d="M76 17 C 84 12 94 9 100 8" fill="none" stroke="#2f7d40" stroke-width="1.6" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg>
     </div>
     <div class="mark">Trellis</div>
     <h1>Grow a knowledge graph<br/><em>from YouTube</em></h1>

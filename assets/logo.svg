@@ -1,0 +1,33 @@
+<svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trellis logo">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6cf57"/><stop offset="1" stop-color="#cf9a22"/>
+    </linearGradient>
+    <linearGradient id="vine" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#2f9b4e"/><stop offset="0.55" stop-color="#5ec45f"/><stop offset="1" stop-color="#8fe07a"/>
+    </linearGradient>
+    <clipPath id="frame">
+      <rect x="24" y="24" width="80" height="80" rx="16"/>
+    </clipPath>
+  </defs>
+
+  <g class="swayg">
+    <!-- lattice bars (clipped to the frame) -->
+    <g clip-path="url(#frame)" stroke="url(#gold)" stroke-width="5" stroke-linecap="round">
+      <path d="M24 56 L56 24 M24 80 L80 24 M24 104 L104 24 M40 104 L104 40 M64 104 L104 64 M88 104 L104 88"/>
+      <path d="M24 72 L72 104 M24 48 L80 104 M24 24 L104 104 M40 24 L104 88 M64 24 L104 64 M88 24 L104 40"/>
+    </g>
+    <!-- frame -->
+    <rect x="24" y="24" width="80" height="80" rx="16" fill="none" stroke="url(#gold)" stroke-width="6"/>
+
+    <!-- vine climbing the trellis -->
+    <path class="vine" fill="none" stroke="url(#vine)" stroke-width="6.5" stroke-linecap="round"
+      d="M52 110 C 40 92 72 86 58 70 C 47 57 82 52 70 36 C 63 27 70 24 76 16"/>
+
+    <!-- leaf at the tip -->
+    <g class="leaf">
+      <path d="M76 16 C 86 4 102 6 102 6 C 101 19 90 26 76 18 Z" fill="url(#vine)"/>
+      <path d="M76 17 C 84 12 94 9 100 8" fill="none" stroke="#2f7d40" stroke-width="1.6" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
