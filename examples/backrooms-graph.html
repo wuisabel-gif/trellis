@@ -67,9 +67,9 @@
 
 <div class="panel">
   <h1><span class="acc">Backrooms</span> wiki vault</h1>
-  <p>Levels, entities, objects, and groups from the Backrooms Wiki, linked the way
-  an Obsidian graph connects notes. Drag nodes, scroll to zoom, hover to follow a
-  thread through the levels.</p>
+  <p>Built around the Levels. Each Level is a hub; the entities, objects, and groups
+  found there hang off it, the way an Obsidian graph connects notes. Drag nodes,
+  scroll to zoom, hover a Level to see what lives there.</p>
 </div>
 
 <div class="legend">
@@ -124,18 +124,16 @@ const COLORS = { lev:"#34d399", ent:"#f87171", obj:"#fbbf24", grp:"#a78bfa", lor
 
 // --- manually curated from the Backrooms Wiki (backrooms-wiki.wikidot.com) ---
 const N = [
-  // hubs
-  ["LV","Levels","lev",1],["EN","Entities","ent",1],["OB","Objects","obj",1],
-  ["GR","Groups","grp",1],["LO","Lore","lore",1],
-  // levels
-  ["l0","Level 0 - The Lobby","lev",0],["l1","Level 1 - Habitable Zone","lev",0],["l2","Level 2 - Pipe Dreams","lev",0],
-  ["l3","Level 3 - Electrical Station","lev",0],["l4","Level 4 - Abandoned Office","lev",0],["l5","Level 5 - Terror Hotel","lev",0],
-  ["l6","Level 6 - Lights Out","lev",0],["l9","Level 9 - The Suburbs","lev",0],["l11","Level 11 - The City","lev",0],
-  ["lrun","Level ! - Run for Your Life","lev",0],["lfun","Level Fun (=)","lev",0],["l188","Level 188 - The Windows","lev",0],
+  // LEVELS are the hubs — every entity, object and group hangs off the level it belongs to
+  ["l0","Level 0 - The Lobby","lev",1],["l1","Level 1 - Habitable Zone","lev",1],["l2","Level 2 - Pipe Dreams","lev",1],
+  ["l3","Level 3 - Electrical Station","lev",1],["l4","Level 4 - Abandoned Office","lev",1],["l5","Level 5 - Terror Hotel","lev",1],
+  ["l6","Level 6 - Lights Out","lev",1],["l9","Level 9 - The Suburbs","lev",1],["l11","Level 11 - The City","lev",1],
+  ["lrun","Level ! - Run for Your Life","lev",1],["lfun","Level Fun (=)","lev",1],["l188","Level 188 - The Windows","lev",1],
   // entities
   ["e1","Smilers","ent",0],["e2","Hounds","ent",0],["e3","Skin-Stealers","ent",0],
   ["e4","Facelings","ent",0],["e5","Deathrats","ent",0],["e6","Bacteria","ent",0],
-  ["e7","Clumps","ent",0],["e8","Partygoers","ent",0],["e9","Entity 186 - The Rockstar","ent",0],["e10","Entity 37 - Curabitur Birds","ent",0],
+  ["e7","Clumps","ent",0],["e8","Partygoers","ent",0],["e9","Entity 186 - The Rockstar","ent",0],
+  ["e10","Entity 37 - Curabitur Birds","ent",0],["e11","The Windows","ent",0],
   // objects
   ["o1","Almond Water","obj",0],["o2","Royal Ration","obj",0],["o3","Liquid Pain","obj",0],
   ["o4","Firesalt","obj",0],["o5","Joy Crystals","obj",0],["o6","Wonder Sap","obj",0],
@@ -147,34 +145,37 @@ const N = [
   ["lo4","The M.E.G. Database","lore",0],["lo5","Survival guide","lore",0],
 ];
 const L = [
-  // hub memberships
-  ["LV","l0"],["LV","l1"],["LV","l2"],["LV","l3"],["LV","l4"],["LV","l5"],["LV","l6"],["LV","l9"],["LV","l11"],["LV","lrun"],["LV","lfun"],["LV","l188"],
-  ["EN","e1"],["EN","e2"],["EN","e3"],["EN","e4"],["EN","e5"],["EN","e6"],["EN","e7"],["EN","e8"],["EN","e9"],["EN","e10"],
-  ["OB","o1"],["OB","o2"],["OB","o3"],["OB","o4"],["OB","o5"],["OB","o6"],
-  ["GR","g1"],["GR","g2"],["GR","g3"],["GR","g4"],["GR","g5"],["GR","g6"],
-  ["LO","lo1"],["LO","lo2"],["LO","lo3"],["LO","lo4"],["LO","lo5"],
-  // levels in sequence (the early descent)
+  // the descent — levels chained in sequence
   ["l0","l1"],["l1","l2"],["l2","l3"],["l3","l4"],["l4","l5"],["l5","l6"],["l6","l9"],["l9","l11"],
-  // cross-topic edges — entities inhabit levels, groups roam, objects matter
-  ["e1","l0"],     // Smilers lurk in the dark of Level 0
-  ["e1","lrun"],   // Smilers on the run level
-  ["e2","l1"],["e2","l11"],   // Hounds in the habitable zone and the city
-  ["e3","l4"],     // Skin-Stealers in the office
-  ["e4","l1"],["e4","l9"],    // Facelings everywhere people gather
-  ["e8","lfun"],   // Partygoers haunt Level Fun
-  ["e8","o3"],     // Partygoers and Liquid Pain
-  ["e10","l3"],    // Curabitur Birds on Level 3
-  ["o1","l1"],     // Almond Water, found across the Backrooms
-  ["o1","lo5"],    // the survival staple
-  ["o1","g1"],     // M.E.G. distributes it
-  ["o4","e1"],     // Firesalt wards off entities
-  ["g1","l1"],["g1","lo4"],["g1","o2"],["g1","lo5"],  // the M.E.G. and its database, rations, guides
-  ["g4","l1"],["g4","lo1"],   // B.N.T.G. moves between levels
-  ["g2","e3"],     // Eyes of Argos document entities
-  ["g3","lo3"],    // The Lost are wandering survivors
-  ["lo1","lo2"],   // no-clip out of the Frontrooms
-  ["lo1","l0"],    // you no-clip into Level 0
-  ["lo3","g1"],    // wanderers and the M.E.G.
+  // entities -> the levels they inhabit
+  ["e1","l0"],["e1","lrun"],["e1","l2"],            // Smilers
+  ["e2","l1"],["e2","l11"],["e2","l6"],["e2","l5"], // Hounds
+  ["e3","l4"],                                       // Skin-Stealers
+  ["e4","l1"],["e4","l9"],["e4","l11"],["e4","l4"], // Facelings
+  ["e5","l1"],                                       // Deathrats
+  ["e6","l1"],["e6","l0"],                           // Bacteria
+  ["e7","l1"],["e7","l2"],                           // Clumps
+  ["e8","lfun"],                                     // Partygoers
+  ["e9","lfun"],                                     // The Rockstar
+  ["e10","l3"],                                      // Curabitur Birds
+  ["e11","l188"],                                    // The Windows
+  // objects -> levels (and what they relate to)
+  ["o1","l0"],["o1","l1"],["o1","g1"],["o1","lo5"], // Almond Water
+  ["o2","l1"],["o2","g1"],                           // Royal Ration
+  ["o3","lfun"],["o3","e8"],                         // Liquid Pain
+  ["o4","l1"],["o4","e1"],["o4","e2"],               // Firesalt wards entities
+  ["o5","lfun"],                                     // Joy Crystals
+  ["o6","l9"],                                       // Wonder Sap
+  // groups -> the levels they work
+  ["g1","l1"],["g1","l11"],["g1","lo4"],["g1","lo5"], // M.E.G.
+  ["g2","l1"],["g2","e3"],["g2","e4"],                // Eyes of Argos document entities
+  ["g3","l1"],["g3","lo3"],                           // The Lost
+  ["g4","l1"],["g4","l11"],["g4","lo1"],              // B.N.T.G. transit
+  ["g5","l1"],                                        // Followers of Jerry
+  ["g6","l4"],                                        // Crimson Order
+  // lore threads
+  ["lo1","l0"],["lo1","lo2"],                         // no-clip from the Frontrooms into Level 0
+  ["lo3","g1"],["lo3","g3"],                          // Wanderers
 ];
 
 // --- build node objects ---
@@ -186,7 +187,7 @@ const neigh = {}; nodes.forEach(n => neigh[n.id]=new Set());
 links.forEach(l => { neigh[l.s.id].add(l.t.id); neigh[l.t.id].add(l.s.id); });
 
 // seed positions clustered by group
-const groupAnchor = { lev:[-280,-130], ent:[260,-150], obj:[300,130], grp:[-260,160], lore:[20,215] };
+const groupAnchor = { lev:[0,-10], ent:[280,-50], obj:[180,210], grp:[-280,40], lore:[-70,235] };
 nodes.forEach(n => { const a=groupAnchor[n.g]; n.x=a[0]+(Math.random()-0.5)*180; n.y=a[1]+(Math.random()-0.5)*180; n.vx=0; n.vy=0; });
 
 const canvas = document.getElementById("c");
