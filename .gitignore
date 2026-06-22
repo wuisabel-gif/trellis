@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Working data
+transcripts/
+vault/
+titles.json
+
+# OS / editor
+.DS_Store
+.claude/
