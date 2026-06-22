@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Trellis — grow an Obsidian knowledge graph from YouTube</title>
+<link rel="icon" type="image/png" href="assets/logo.png" />
 <meta name="description" content="Trellis turns a YouTube channel's transcripts into an Obsidian vault whose graph view clusters videos by topic. Linked Markdown notes with tags and wikilinks." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,8 +36,20 @@
 
   .wrap{ position:relative; z-index:1; max-width:1040px; margin:0 auto; padding:0 24px; }
 
-  header.hero{ text-align:center; padding:104px 0 24px; }
-  .mark{ display:inline-flex; align-items:center; gap:10px; font:600 13px/1 "JetBrains Mono",monospace;
+  header.hero{ text-align:center; padding:84px 0 24px; }
+
+  /* logo: the vine climbs the trellis on load, then sways like a living plant */
+  .logo-stage{ display:inline-block; transform-origin:50% 100%;
+    animation: sway 6.5s ease-in-out 1.5s infinite; }
+  .logo{ display:block; height:128px; width:128px; border-radius:26px;
+    border:1px solid rgba(255,255,255,0.14); box-shadow:0 14px 36px rgba(0,0,0,0.45);
+    animation: grow 1.6s cubic-bezier(.16,.7,.2,1) both, glow 4.5s ease-in-out 1.7s infinite; }
+  @keyframes grow{ from{ clip-path:inset(100% 0 0 0); opacity:0; } 45%{ opacity:1; } to{ clip-path:inset(0 0 0 0); opacity:1; } }
+  @keyframes sway{ 0%,100%{ transform:rotate(-1.4deg); } 50%{ transform:rotate(1.4deg); } }
+  @keyframes glow{ 0%,100%{ filter:drop-shadow(0 4px 14px rgba(67,209,127,.20)); } 50%{ filter:drop-shadow(0 6px 26px rgba(67,209,127,.42)); } }
+  @media (prefers-reduced-motion:reduce){ .logo-stage{ animation:none; } .logo{ animation:none; } }
+
+  .mark{ display:inline-flex; align-items:center; gap:10px; margin-top:14px; font:600 13px/1 "JetBrains Mono",monospace;
     letter-spacing:0.28em; text-transform:uppercase; color:var(--accent-2); }
   .mark .leaf{ width:22px;height:22px; }
   h1{ font-family:"Fraunces",serif; font-weight:800; font-size:clamp(46px,9vw,96px); line-height:0.98;
@@ -85,13 +98,10 @@
 
 <div class="wrap">
   <header class="hero">
-    <div class="mark">
-      <svg class="leaf" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round">
-        <path d="M12 21V9"/><path d="M12 13c0-3 2.5-5 7-5 0 4-2.5 6-7 6Z" fill="rgba(67,209,127,0.25)"/>
-        <path d="M12 11C12 8 9.5 6 5 6c0 4 2.5 6 7 6Z" fill="rgba(67,209,127,0.15)"/>
-      </svg>
-      Trellis
+    <div class="logo-stage">
+      <img class="logo" src="assets/logo.png" alt="Trellis logo" width="150" height="150" />
     </div>
+    <div class="mark">Trellis</div>
     <h1>Grow a knowledge graph<br/><em>from YouTube</em></h1>
     <p class="lede">Trellis turns a channel's transcripts into an Obsidian vault whose graph view clusters videos by topic. Give your notes a lattice, and knowledge climbs.</p>
     <div class="cta">
