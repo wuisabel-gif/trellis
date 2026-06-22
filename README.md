@@ -14,7 +14,7 @@ gives them a structure to grow on - linked Markdown notes with topic tags and
 ## How it works
 
 1. **Download** a channel's transcripts (one file per video) with a tool like
-   [TubeScribe](https://github.com/wuisabel-gif/youtube_transcript_download_pro).
+   [TubeScribe](https://wuisabel-gif.github.io/youtube_transcript_download_pro/).
 2. **Scaffold** them into Markdown notes:
    ```bash
    python scripts/build_vault.py --input transcripts/ --output vault/
