@@ -130,45 +130,57 @@ const N = [
   // western philosophy / great books
   ["p1","Epic of Gilgamesh","phil",0],["p2","Homer: The Iliad","phil",0],["p3","Homer: The Odyssey","phil",0],
   ["p4","Virgil: The Aeneid","phil",0],["p5","Dante: Divine Comedy","phil",0],["p6","Plato: The Republic","phil",0],
-  ["p7","Positivism & consciousness","phil",0],
+  ["p7","Positivism & consciousness","phil",0],["p8","Thucydides' History","phil",0],["p9","Augustine's Confessions","phil",0],
+  ["p10","Machiavelli's Prince","phil",0],["p11","Nietzsche & nihilism","phil",0],
   // geo-strategy
   ["g1","Predictive History","geo",0],["g2","The Iran Trap","geo",0],["g3","American empire collapse","geo",0],
   ["g4","US-Iran conflict","geo",0],["g5","The Sicilian Expedition","geo",0],["g6","Bretton Woods & petrodollar","geo",0],
+  ["g7","China's rise","geo",0],["g8","The Thucydides Trap","geo",0],["g9","Taiwan flashpoint","geo",0],["g10","End of the dollar","geo",0],
   // education
   ["e1","The Gaokao critique","edu",0],["e2","Great Books curriculum","edu",0],["e3","Liberal arts in exam schools","edu",0],
-  ["e4","Empathy & creativity","edu",0],["e5","Meritocracy: the VC model","edu",0],
+  ["e4","Empathy & creativity","edu",0],["e5","Meritocracy: the VC model","edu",0],["e6","Moonshot Academy","edu",0],
+  ["e7","The Socratic classroom","edu",0],["e8","Creativity vs conformity","edu",0],
   // money & power
   ["m1","Money as alchemy","mon",0],["m2","Consumerism as slavery","mon",0],["m3","Secret History of power","mon",0],
+  ["m4","Debt & empire","mon",0],["m5","The petro-yuan","mon",0],
   // political philosophy
   ["o1","Civic republicanism","pol",0],["o2","Antibody engineering","pol",0],["o3","Decentralized citizenship","pol",0],
+  ["o4","The polis & the citizen","pol",0],["o5","Decadence & decline","pol",0],
 ];
 const L = [
   // hub memberships
-  ["PH","p1"],["PH","p2"],["PH","p3"],["PH","p4"],["PH","p5"],["PH","p6"],["PH","p7"],
-  ["GE","g1"],["GE","g2"],["GE","g3"],["GE","g4"],["GE","g5"],["GE","g6"],
-  ["ED","e1"],["ED","e2"],["ED","e3"],["ED","e4"],["ED","e5"],
-  ["MO","m1"],["MO","m2"],["MO","m3"],
-  ["PP","o1"],["PP","o2"],["PP","o3"],
-  // the epic lineage
-  ["p1","p2"],["p2","p3"],["p3","p4"],["p4","p5"],
+  ["PH","p1"],["PH","p2"],["PH","p3"],["PH","p4"],["PH","p5"],["PH","p6"],["PH","p7"],["PH","p8"],["PH","p9"],["PH","p10"],["PH","p11"],
+  ["GE","g1"],["GE","g2"],["GE","g3"],["GE","g4"],["GE","g5"],["GE","g6"],["GE","g7"],["GE","g8"],["GE","g9"],["GE","g10"],
+  ["ED","e1"],["ED","e2"],["ED","e3"],["ED","e4"],["ED","e5"],["ED","e6"],["ED","e7"],["ED","e8"],
+  ["MO","m1"],["MO","m2"],["MO","m3"],["MO","m4"],["MO","m5"],
+  ["PP","o1"],["PP","o2"],["PP","o3"],["PP","o4"],["PP","o5"],
+  // the epic lineage + medieval/modern thread
+  ["p1","p2"],["p2","p3"],["p3","p4"],["p4","p5"],["p5","p9"],["p9","p10"],["p10","p11"],
   // geo-strategy threads
-  ["g1","g2"],["g1","g3"],["g2","g4"],["g2","g5"],["g3","g6"],
+  ["g1","g2"],["g1","g3"],["g2","g4"],["g2","g5"],["g3","g6"],["g7","g8"],["g8","g9"],["g3","g10"],["g6","g10"],
   // education threads
-  ["e1","e4"],["e1","e2"],["e2","e3"],["e1","e5"],
+  ["e1","e4"],["e1","e2"],["e2","e3"],["e1","e5"],["e6","e7"],["e7","e8"],["e4","e8"],["e6","e1"],
   // money threads
-  ["m1","m2"],["m1","m3"],
+  ["m1","m2"],["m1","m3"],["m1","m4"],["m4","m5"],
   // political philosophy threads
-  ["o1","o2"],["o1","o3"],["o2","o3"],
+  ["o1","o2"],["o1","o3"],["o2","o3"],["o4","o1"],["o5","o4"],
   // cross-topic edges — where the thinking connects
   ["g5","g3"],   // Sicilian Expedition -> American empire collapse (historical analogy)
+  ["g8","p8"],   // Thucydides Trap -> Thucydides' History
+  ["g7","g3"],   // China's rise -> American empire collapse
   ["g6","m1"],   // Bretton Woods -> money as alchemy
+  ["g10","m5"],  // end of the dollar -> petro-yuan
+  ["g10","m4"],  // end of the dollar -> debt & empire
   ["g3","m3"],   // empire collapse -> secret history of power
   ["p6","o1"],   // Plato's Republic -> civic republicanism
   ["p6","e2"],   // Plato -> Great Books curriculum
-  ["e2","p1"],["e2","p2"],["e2","p4"],["e2","p5"], // Great Books -> the canon
+  ["e2","p1"],["e2","p2"],["e2","p4"],["e2","p5"],["e2","p9"],["e2","p10"], // Great Books -> the canon
   ["e5","m2"],   // meritocracy & trauma -> consumerism as slavery
   ["o2","e2"],   // antibody engineering -> education
   ["p7","e4"],   // positivism & consciousness -> empathy & creativity
+  ["p10","g1"],  // Machiavelli -> predictive strategy
+  ["p11","m2"],  // nihilism -> consumerism as slavery
+  ["o5","g3"],   // decadence & decline -> empire collapse
   ["g1","m3"],   // predictive history -> secret history of power
 ];
 

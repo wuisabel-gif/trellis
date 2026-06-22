@@ -66,7 +66,7 @@
 
 <div class="panel">
   <h1><span class="acc">3Blue1Brown</span> transcript vault</h1>
-  <p>32 video transcripts bulk-downloaded with TubeScribe, then linked by shared
+  <p>47 video transcripts bulk-downloaded with TubeScribe, then linked by shared
   concept the way an Obsidian graph connects notes. Drag nodes, scroll to zoom,
   hover to trace a topic.</p>
 </div>
@@ -77,6 +77,7 @@
   <span><i class="dot" style="background:#f87171"></i>Neural networks</span>
   <span><i class="dot" style="background:#34d399"></i>Fourier &amp; waves</span>
   <span><i class="dot" style="background:#fbbf24"></i>Number theory</span>
+  <span><i class="dot" style="background:#f472b6"></i>Probability</span>
 </div>
 <div class="hint">drag to pan · scroll to zoom · drag a node to pull it</div>
 
@@ -121,58 +122,74 @@
 </div>
 
 <script>
-const COLORS = { la:"#a78bfa", calc:"#60a5fa", nn:"#f87171", fou:"#34d399", nt:"#fbbf24" };
+const COLORS = { la:"#a78bfa", calc:"#60a5fa", nn:"#f87171", fou:"#34d399", nt:"#fbbf24", prob:"#f472b6" };
 
 // --- manually curated example data (a bulk channel download made into a vault) ---
 const N = [
   // hubs
   ["LA","Linear Algebra","la",1],["CA","Calculus","calc",1],["NN","Neural Networks","nn",1],
-  ["FO","Fourier & Waves","fou",1],["NT","Number Theory","nt",1],
+  ["FO","Fourier & Waves","fou",1],["NT","Number Theory","nt",1],["PR","Probability","prob",1],
   // linear algebra
   ["la1","Vectors","la",0],["la2","Span & basis","la",0],["la3","Linear transformations","la",0],
   ["la4","Matrix multiplication","la",0],["la5","The determinant","la",0],["la6","Inverse & null space","la",0],
   ["la7","Dot products","la",0],["la8","Cross products","la",0],["la9","Change of basis","la",0],
   ["la10","Eigenvectors & eigenvalues","la",0],["la11","Abstract vector spaces","la",0],
+  ["la12","Cramer's rule","la",0],["la13","Matrix exponents e^M","la",0],
   // calculus
   ["ca1","Essence of calculus","calc",0],["ca2","Paradox of the derivative","calc",0],
   ["ca3","Derivative formulas","calc",0],["ca4","Chain rule & product rule","calc",0],
   ["ca5","Derivatives of exponentials","calc",0],["ca6","Implicit differentiation","calc",0],
   ["ca7","Fundamental theorem","calc",0],["ca8","Area and slope","calc",0],["ca9","Taylor series","calc",0],
+  ["ca10","Limits (epsilon-delta)","calc",0],["ca11","Differential equations","calc",0],
   // neural networks
   ["nn1","What is a neural network?","nn",0],["nn2","Gradient descent","nn",0],
   ["nn3","Backpropagation","nn",0],["nn4","Backprop calculus","nn",0],
+  ["nn5","But what is a GPT?","nn",0],["nn6","Attention in transformers","nn",0],["nn7","How LLMs store facts","nn",0],
   // fourier
   ["fo1","Fourier Transform","fou",0],["fo2","Fourier series","fou",0],
   ["fo3","Euler's formula","fou",0],["fo4","Convolutions","fou",0],
+  ["fo5","The uncertainty principle","fou",0],["fo6","Sound & frequency","fou",0],
   // number theory
   ["nt1","Primes make spirals","nt",0],["nt2","Pi hiding in primes","nt",0],
-  ["nt3","Riemann zeta function","nt",0],["nt4","Bayes theorem","nt",0],
+  ["nt3","Riemann zeta function","nt",0],["nt4","Pythagorean triples","nt",0],["nt5","Newton's fractal","nt",0],
+  // probability
+  ["pr1","Binomial distributions","prob",0],["pr2","Bayes theorem","prob",0],["pr3","Central limit theorem","prob",0],
+  ["pr4","Why pi in the normal curve","prob",0],["pr5","Markov chains","prob",0],
 ];
 const L = [
   // hub memberships
-  ["LA","la1"],["LA","la2"],["LA","la3"],["LA","la4"],["LA","la5"],["LA","la6"],["LA","la7"],["LA","la8"],["LA","la9"],["LA","la10"],["LA","la11"],
-  ["CA","ca1"],["CA","ca2"],["CA","ca3"],["CA","ca4"],["CA","ca5"],["CA","ca6"],["CA","ca7"],["CA","ca8"],["CA","ca9"],
-  ["NN","nn1"],["NN","nn2"],["NN","nn3"],["NN","nn4"],
-  ["FO","fo1"],["FO","fo2"],["FO","fo3"],["FO","fo4"],
-  ["NT","nt1"],["NT","nt2"],["NT","nt3"],["NT","nt4"],
+  ["LA","la1"],["LA","la2"],["LA","la3"],["LA","la4"],["LA","la5"],["LA","la6"],["LA","la7"],["LA","la8"],["LA","la9"],["LA","la10"],["LA","la11"],["LA","la12"],["LA","la13"],
+  ["CA","ca1"],["CA","ca2"],["CA","ca3"],["CA","ca4"],["CA","ca5"],["CA","ca6"],["CA","ca7"],["CA","ca8"],["CA","ca9"],["CA","ca10"],["CA","ca11"],
+  ["NN","nn1"],["NN","nn2"],["NN","nn3"],["NN","nn4"],["NN","nn5"],["NN","nn6"],["NN","nn7"],
+  ["FO","fo1"],["FO","fo2"],["FO","fo3"],["FO","fo4"],["FO","fo5"],["FO","fo6"],
+  ["NT","nt1"],["NT","nt2"],["NT","nt3"],["NT","nt4"],["NT","nt5"],
+  ["PR","pr1"],["PR","pr2"],["PR","pr3"],["PR","pr4"],["PR","pr5"],
   // sequential within series
-  ["la1","la2"],["la2","la3"],["la3","la4"],["la4","la5"],["la5","la6"],["la6","la7"],["la7","la8"],["la8","la9"],["la9","la10"],["la10","la11"],
-  ["ca1","ca2"],["ca2","ca3"],["ca3","ca4"],["ca4","ca5"],["ca5","ca6"],["ca6","ca7"],["ca7","ca8"],["ca8","ca9"],
-  ["nn1","nn2"],["nn2","nn3"],["nn3","nn4"],
-  ["fo1","fo2"],["fo2","fo3"],["fo3","fo4"],
-  ["nt1","nt2"],
+  ["la1","la2"],["la2","la3"],["la3","la4"],["la4","la5"],["la5","la6"],["la6","la7"],["la7","la8"],["la8","la9"],["la9","la10"],["la10","la11"],["la5","la12"],["la10","la13"],
+  ["ca1","ca10"],["ca10","ca2"],["ca2","ca3"],["ca3","ca4"],["ca4","ca5"],["ca5","ca6"],["ca6","ca7"],["ca7","ca8"],["ca8","ca9"],["ca1","ca11"],
+  ["nn1","nn2"],["nn2","nn3"],["nn3","nn4"],["nn1","nn5"],["nn5","nn6"],["nn6","nn7"],
+  ["fo1","fo2"],["fo2","fo3"],["fo3","fo4"],["fo1","fo5"],["fo6","fo2"],
+  ["nt1","nt2"],["nt3","nt2"],
+  ["pr1","pr2"],["pr2","pr3"],["pr3","pr4"],["pr3","pr5"],
   // cross-topic edges — the interesting part of a knowledge graph
   ["ca4","nn4"],   // chain rule -> backprop calculus
   ["la3","nn1"],   // linear transformations -> neural network
   ["la4","nn1"],   // matrix multiplication -> neural network
+  ["la3","nn6"],   // linear transformations -> attention
   ["ca2","nn2"],   // derivative -> gradient descent
   ["ca9","fo3"],   // Taylor series -> Euler's formula
   ["fo1","fo3"],   // Fourier transform -> Euler's formula
   ["fo4","fo1"],   // convolutions -> Fourier transform
-  ["ca7","fo1"],   // fundamental theorem (integration) -> Fourier
+  ["fo4","pr3"],   // convolutions -> central limit theorem
+  ["ca7","fo1"],   // fundamental theorem -> Fourier
+  ["ca11","la13"], // differential equations -> matrix exponents
+  ["ca5","la13"],  // exponentials -> matrix exponents
   ["fo3","nt3"],   // Euler's formula -> Riemann zeta
   ["la10","nt3"],  // eigenvalues -> zeta (spectral)
   ["fo3","CA"],    // Euler bridges into calculus
+  ["nt5","ca3"],   // Newton's fractal -> derivatives (Newton's method)
+  ["pr4","fo1"],   // normal curve & pi -> Fourier
+  ["pr2","nn2"],   // Bayes -> learning
 ];
 
 // --- build node objects ---
@@ -184,7 +201,7 @@ const neigh = {}; nodes.forEach(n => neigh[n.id]=new Set());
 links.forEach(l => { neigh[l.s.id].add(l.t.id); neigh[l.t.id].add(l.s.id); });
 
 // seed positions clustered by group
-const groupAnchor = { la:[-260,-120], calc:[240,-150], nn:[40,170], fou:[300,120], nt:[-240,170] };
+const groupAnchor = { la:[-290,-120], calc:[270,-150], nn:[70,200], fou:[330,90], nt:[-270,160], prob:[-30,-240] };
 nodes.forEach(n => { const a=groupAnchor[n.g]; n.x=a[0]+(Math.random()-0.5)*180; n.y=a[1]+(Math.random()-0.5)*180; n.vx=0; n.vy=0; });
 
 const canvas = document.getElementById("c");
