@@ -9,7 +9,6 @@ gives them a structure to grow on - linked Markdown notes with topic tags and
 
 <p align="center">
   <a href="https://wuisabel-gif.github.io/trellis/examples/professor-jiang-graph.html">See an example graph &rarr;</a>
-  (Professor Jiang's Predictive History channel, woven into topics)
 </p>
 
 ## How it works
