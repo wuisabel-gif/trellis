@@ -8,8 +8,8 @@ gives them a structure to grow on - linked Markdown notes with topic tags and
 `[[wikilinks]]` that Obsidian renders as a living knowledge graph.
 
 <p align="center">
-  <a href="examples/example-graph.html">See an example graph &rarr;</a>
-  (a whole 3Blue1Brown channel, woven into topics)
+  <a href="https://wuisabel-gif.github.io/trellis/examples/professor-jiang-graph.html">See an example graph &rarr;</a>
+  (Professor Jiang's Predictive History channel, woven into topics)
 </p>
 
 ## How it works
