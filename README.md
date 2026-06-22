@@ -12,6 +12,7 @@
   <img src="https://img.shields.io/badge/python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python 3.9+" />
   <img src="https://img.shields.io/badge/Obsidian-vault-7C3AED?style=flat-square&logo=obsidian&logoColor=white" alt="Obsidian" />
   <img src="https://img.shields.io/badge/deps-none-555?style=flat-square" alt="No dependencies" />
+  <img src="https://img.shields.io/badge/license-Apache%202.0-555?style=flat-square" alt="Apache 2.0" />
 </p>
 
 Trellis turns a YouTube channel or playlist into an Obsidian vault whose graph
