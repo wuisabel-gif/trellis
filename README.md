@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="Trellis logo" width="120" height="120" />
+</p>
+
 <h1 align="center">Trellis</h1>
 
 <p align="center"><b>Grow an Obsidian knowledge graph from YouTube.</b></p>
@@ -22,6 +26,30 @@ gives them a structure to grow on - linked Markdown notes with topic tags and
 3. **Weave** the graph - add `#topic` tags and `[[wikilinks]]` between related
    videos. (This is the step Claude is good at: semantic linking.)
 4. **Open** the `vault/` folder in Obsidian and hit Graph View.
+
+## Why Obsidian
+
+[Obsidian](https://obsidian.md) is one of the most popular note-taking apps for
+building a "second brain," with millions of users and a famously devoted
+community. It's free for personal use, and it stores everything as plain Markdown
+files on your own disk - no account, no cloud lock-in, no proprietary format. The
+notes Trellis writes are just text files you fully own.
+
+What makes it the right home for transcripts is the way it connects things:
+
+- **`[[Wikilinks]]` and backlinks.** Link one note to another and Obsidian builds
+  the reverse link automatically. A web forms as you write.
+- **Graph View.** Obsidian draws every note and link as an interactive graph (the
+  look the examples here imitate). Clusters appear on their own, and you can
+  literally see how ideas across dozens of videos relate.
+- **Tags and search.** Group notes by `#topic`, then filter the graph by tag to
+  watch a subject light up.
+- **Plugins.** A large community ecosystem adds everything from spaced repetition
+  to canvas boards on top of your notes.
+
+A channel's worth of transcripts is a pile of disconnected text. Inside Obsidian,
+with a few tags and links, it becomes something you can explore - which is exactly
+the gap Trellis fills.
 
 ## As a Claude skill
 
